@@ -1,8 +1,10 @@
 import React from 'react';
+import { Link } from 'react-router';
 
 const JobCard = ({job}) => {
   const {
     title,
+    _id,
     location,
     jobType,
     category,
@@ -36,9 +38,6 @@ const JobCard = ({job}) => {
           <span className="badge badge-outline">{category}</span>
           <span className="badge badge-outline">Deadline: {applicationDeadline}</span>
         </div>
-
-        <p className="mt-3 text-sm text-gray-700 line-clamp-3">{description}</p>
-
         <div className="mt-4">
           <p className="text-sm text-blue-800">
             <strong>Salary:</strong> {salaryRange?.min} - {salaryRange?.max} BDT
@@ -67,7 +66,9 @@ const JobCard = ({job}) => {
         </details>
 
         <div className="mt-5 text-right">
-          <button className="btn btn-sm btn-primary rounded-full">Apply Now</button>
+          <Link to={`/jobs/${_id}`}>
+          <button className="btn btn-sm btn-ghost bg-blue-300  rounded-lg w-full">Show Details</button>
+          </Link>
         </div>
       </div>
     </div> 
