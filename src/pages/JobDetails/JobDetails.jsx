@@ -5,6 +5,7 @@ const JobDetails = () => {
  const job = useLoaderData();
  const {
     title,
+    _id,
     company,
     location,
     jobType,
@@ -71,7 +72,9 @@ const JobDetails = () => {
           </div>
 
           <div className="text-center">
+            <Link to={`/jobApply/${_id}`}>
             <button className="btn btn-ghost bg-blue-300 btn-wide">Apply Now</button>
+            </Link>
             <Link to="/">
             <button className="btn btn-ghost bg-blue-300 btn-wide">Back to Home</button>
             </Link>
