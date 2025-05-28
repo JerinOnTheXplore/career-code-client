@@ -6,6 +6,11 @@ const NavBar = () => {
   const {user,signOutUser} = use(AuthContext);
     const links = <>
         <li><NavLink to="/">Home</NavLink></li>
+        {
+          user && <>
+           <li><NavLink to="/myApplications">My Applications</NavLink></li>
+          </>
+        }
     </>
 
   const handleSignOut = ()=>{
