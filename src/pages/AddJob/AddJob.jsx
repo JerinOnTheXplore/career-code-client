@@ -1,13 +1,46 @@
 import React from 'react';
+import UseAuth from '../../hooks/UseAuth';
+import axios from 'axios';
+import Swal from 'sweetalert2';
 
 const AddJob = () => {
-
+  const {user} = UseAuth();
   const handleAddJob = e =>{
     e.preventDefault();
     const form = e.target;
     const formData = new FormData(form);
     const data = Object.fromEntries(formData.entries());
     console.log(data);
+
+    // process salary range data
+    const {minSalary,maxSalary,currency, ...newJob} = data;
+    newJob.salaryRange = {minSalary,maxSalary,currency};
+    // process requirements
+    const requirementsString = newJob.requirements;
+    const requirementsDirty = requirementsString.split(',');
+    const requirementsClean = requirementsDirty.map(req => req.trim());
+    newJob.requirements = requirementsClean;
+    console.log(requirementsDirty,requirementsClean);
+    newJob.responsibilities = newJob.responsibilities.split(',').map(res=>res.trim());
+    console.log(newJob);
+
+// save job to the database
+axios.post('http://localhost:3000/jobs', newJob)
+.then(res=>{
+    if(res.data.insertedId){
+     Swal.fire({
+  position: "top-end",
+  icon: "success",
+  title: "This job has been saved and published",
+  showConfirmButton: false,
+  timer: 1500
+});   
+    }
+})
+.catch(error=>{
+    console.log(error);
+})
+
   }
     return (
         <div>
@@ -86,7 +119,9 @@ const AddJob = () => {
         {/* HR Email */}
         <div>
           <label className="font-semibold">HR Email</label>
-          <input type="email" name="hr_email" className="input input-bordered w-full mt-1" required />
+          <input type="email" name="hr_email"
+          defaultValue={user.email}
+          className="input input-bordered w-full mt-1" required />
         </div>
 
         {/* Status */}
