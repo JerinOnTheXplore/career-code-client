@@ -1,9 +1,8 @@
 import React from 'react';
 
 const JobApplicationRow = ({application,index}) => {
+  const {title} = application;
     return (
-    <div>
-     {/* row 1 */}
       <tr>
         <th>
           <label>
@@ -20,7 +19,7 @@ const JobApplicationRow = ({application,index}) => {
               </div>
             </div>
             <div>
-              <div className="font-bold">Hart Hagerty</div>
+              <div className="font-bold">{title}</div>
               <div className="text-sm opacity-50">United States</div>
             </div>
           </div>
@@ -35,7 +34,6 @@ const JobApplicationRow = ({application,index}) => {
           <button className="btn btn-ghost btn-xs">details</button>
         </th>
       </tr>   
-    </div>
     );
 };
 

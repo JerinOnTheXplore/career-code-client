@@ -7,11 +7,16 @@ const ApplicationList = ({myApplicationsPromise}) => {
 <div>
  <h3 className='text-3xl'>Jobs applied so far: {applications.length}</h3>
  <div className="overflow-x-auto">
-  <table className="table">
-    {/* head */}
-    
+  <table>
+    <thead>
+       <tr>
+        <th>No</th>
+        <th>Name</th>
+        <th>Job</th>
+       </tr>
+    </thead>
     <tbody>
-     {
+      {
       applications.map((application,index)=>
         <JobApplicationRow
         application={application}
@@ -22,7 +27,6 @@ const ApplicationList = ({myApplicationsPromise}) => {
       )
      } 
     </tbody>
-    
   </table>
 </div>   
 </div>

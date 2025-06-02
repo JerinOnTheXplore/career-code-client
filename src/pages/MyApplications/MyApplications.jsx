@@ -2,13 +2,17 @@ import React, { Suspense } from 'react';
 import ApplicationStats from './ApplicationStats';
 import ApplicationList from './ApplicationList';
 import UseAuth from '../../hooks/UseAuth';
-import { myApplicationsPromise } from '../../api/ApplicationsAPI';
+import useApplicationApi from '../../api/useApplicationApi';
+
 
 
 
 const MyApplications = () => {
 
   const {user} = UseAuth();
+  const {myApplicationsPromise} = useApplicationApi();
+
+  // console.log('Token in the context',user.accessToken);
     return (
     <div className='text-center'>
      <ApplicationStats/>
